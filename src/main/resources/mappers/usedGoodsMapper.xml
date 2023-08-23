@@ -14,8 +14,8 @@
  			, `price`
  			, `description`
  			, `image`
- 			, `createAt`
- 			, `updateAt`
+ 			, `createdAt`
+ 			, `updatedAt`
  		FROM
  			`used_goods`	  
  	</select>

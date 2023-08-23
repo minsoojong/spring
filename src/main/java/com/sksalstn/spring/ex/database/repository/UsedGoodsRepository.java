@@ -13,6 +13,6 @@ import com.sksalstn.spring.ex.database.domain.UsedGoods;
 public interface UsedGoodsRepository {
 	
 	// used_goods 테이블 모든행 조회
-	public UsedGoods selectUsedGoodsList();
+	public List<UsedGoods> selectUsedGoodsList();
 
 }
