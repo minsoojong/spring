@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sksalstn.spring.ex.user.Service.UserService;
 import com.sksalstn.spring.ex.user.domain.User;
 
-@Controller
+
 @RequestMapping("/ajax/user")
+@Controller
 public class NewUserCotroller {
 	
 	@Autowired
@@ -33,34 +34,59 @@ public class NewUserCotroller {
 		
 	}
 	
-	@GetMapping("/create")
-	@ResponseBody
-	public Map<String, String> createUser(
-			@RequestParam("name") String name
-			, @RequestParam("birthday") String yyyymmdd
-			, @RequestParam("email")String email) {
-		
-		int count = userService.addUser(name, yyyymmdd, email);
-		
-		// 성공 실패 여부
-		// 성공 : {"result":"success" }
-		// 실패 : {"result":"fali"
-		Map<String, String> resultMap = new HashMap<>();
-		if(count == 1) { // 성공
-			resultMap.put("result", "success");
-			
-		}else { // 실패
-			resultMap.put("result", "fali");
-		}
-		
-		return resultMap;
-		
-		
-	}
+//	@GetMapping("/create")
+//	@ResponseBody
+//	public Map<String, String> createUser(
+//			@RequestParam("name") String name
+//			, @RequestParam("birthday") String birthday
+//			, @RequestParam("email")String email) {
+//		
+//		int count = userService.
+//		
+//		// 성공 실패 여부
+//		// 성공 : {"result":"success" }
+//		// 실패 : {"result":"fail"
+//		Map<String, String> resultMap = new HashMap<>();
+//		if(count == 1) { // 성공
+//			resultMap.put("result", "success");
+//			
+//		}else { // 실패
+//			resultMap.put("result", "fali");
+//		}
+//		
+//		return resultMap;
+//		
+//		
+//	}
 	
 	@GetMapping("/input")
 	public String userInput() {
 		return "ajax/user/input";
+	}
+	
+	//email 중복 여부를 알려주는 기능
+	@GetMapping("/duplicate-email")
+	@ResponseBody
+	public Map<String, Boolean> isDuplicateEmail(
+			@RequestParam("email") String email) {
+		
+		boolean isDuplicate = userService.isDuplicateEmail(email);
+		
+		// 중복됨 : {"isDuplicate":true}
+		// 중복안됨 : {"isDuplicate":false}
+		
+		Map<String, Boolean> resultMap = new HashMap<>();
+		
+		if(isDuplicate) {
+			// 중복됨
+			resultMap.put("isDuplicate", true);
+		}else {
+			// 중복안됨 
+			resultMap.put("isDuplicate", false);
+		}
+		return resultMap;
+		
+		
 	}
 			
 	
