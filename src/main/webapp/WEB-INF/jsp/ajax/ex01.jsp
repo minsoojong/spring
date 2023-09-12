@@ -42,7 +42,7 @@
 				$("#name").text("이름 : " + data.name);
 				$("#age").text("나이 : " + data.age);
 					}
-					, error.function() {
+					, error:function() {
 						alert("에러!");
 					}
 						
